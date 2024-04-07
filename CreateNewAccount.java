@@ -74,7 +74,7 @@ public class CreateNewAccount {
 		
 		JLabel lblNewLabel_1_2 = new JLabel("Tên đăng nhập: ");
 		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.BOLD, 21));
-		lblNewLabel_1_2.setBounds(150, 336, 186, 20);
+		lblNewLabel_1_2.setBounds(150, 336, 186, 28);
 		frame.getContentPane().add(lblNewLabel_1_2);
 		
 		tf_tendangnhap = new JTextField();
@@ -85,7 +85,7 @@ public class CreateNewAccount {
 		
 		JLabel lblNewLabel_1_1_2 = new JLabel("Mật khẩu:");
 		lblNewLabel_1_1_2.setFont(new Font("Tahoma", Font.BOLD, 21));
-		lblNewLabel_1_1_2.setBounds(150, 397, 115, 20);
+		lblNewLabel_1_1_2.setBounds(150, 397, 115, 28);
 		frame.getContentPane().add(lblNewLabel_1_1_2);
 		
 		JButton bt_dangki = new JButton("Đăng kí");
