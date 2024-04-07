@@ -41,35 +41,35 @@ public class CreateNewAccount {
 		
 		JLabel lblNewLabel_1 = new JLabel("Tên nhân viên: ");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 21));
-		lblNewLabel_1.setBounds(167, 119, 159, 20);
+		lblNewLabel_1.setBounds(155, 119, 159, 20);
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		tf_tennhanvien = new JTextField();
 		tf_tennhanvien.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		tf_tennhanvien.setBounds(324, 112, 446, 35);
+		tf_tennhanvien.setBounds(347, 112, 446, 35);
 		frame.getContentPane().add(tf_tennhanvien);
 		tf_tennhanvien.setColumns(10);
 		
 		tf_sdt = new JTextField();
 		tf_sdt.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tf_sdt.setColumns(10);
-		tf_sdt.setBounds(324, 169, 345, 35);
+		tf_sdt.setBounds(347, 169, 446, 35);
 		frame.getContentPane().add(tf_sdt);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Số điện thoại: ");
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 21));
-		lblNewLabel_1_1.setBounds(177, 176, 159, 20);
+		lblNewLabel_1_1.setBounds(155, 176, 159, 20);
 		frame.getContentPane().add(lblNewLabel_1_1);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("CCCD: ");
 		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 21));
-		lblNewLabel_1_1_1.setBounds(254, 229, 72, 20);
+		lblNewLabel_1_1_1.setBounds(155, 229, 72, 20);
 		frame.getContentPane().add(lblNewLabel_1_1_1);
 		
 		tf_cccd = new JTextField();
 		tf_cccd.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tf_cccd.setColumns(10);
-		tf_cccd.setBounds(324, 222, 345, 35);
+		tf_cccd.setBounds(347, 222, 446, 35);
 		frame.getContentPane().add(tf_cccd);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("Tên đăng nhập: ");
@@ -80,35 +80,40 @@ public class CreateNewAccount {
 		tf_tendangnhap = new JTextField();
 		tf_tendangnhap.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		tf_tendangnhap.setColumns(10);
-		tf_tendangnhap.setBounds(324, 329, 446, 35);
+		tf_tendangnhap.setBounds(347, 329, 446, 35);
 		frame.getContentPane().add(tf_tendangnhap);
 		
 		JLabel lblNewLabel_1_1_2 = new JLabel("Mật khẩu:");
 		lblNewLabel_1_1_2.setFont(new Font("Tahoma", Font.BOLD, 21));
-		lblNewLabel_1_1_2.setBounds(211, 393, 115, 20);
+		lblNewLabel_1_1_2.setBounds(150, 397, 115, 20);
 		frame.getContentPane().add(lblNewLabel_1_1_2);
 		
 		JButton bt_dangki = new JButton("Đăng kí");
 		bt_dangki.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			}
-		});
+			
+			new Login();
+			frame.dispose();
+			}});
 		bt_dangki.setFont(new Font("Tahoma", Font.BOLD, 22));
-		bt_dangki.setBounds(606, 470, 159, 35);
+		bt_dangki.setBounds(645, 496, 159, 35);
 		frame.getContentPane().add(bt_dangki);
 		
 		JButton bt_thoat = new JButton("Thoát");
 		bt_thoat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new Login();
+				frame.dispose();
 			}
 		});
 		bt_thoat.setFont(new Font("Tahoma", Font.BOLD, 22));
-		bt_thoat.setBounds(192, 470, 159, 35);
+		bt_thoat.setBounds(167, 496, 159, 35);
 		frame.getContentPane().add(bt_thoat);
 		
 		passwordField = new JPasswordField();
 		passwordField.setFont(new Font("Tahoma", Font.BOLD, 20));
-		passwordField.setBounds(323, 390, 409, 35);
+		passwordField.setBounds(346, 390, 447, 35);
 		frame.getContentPane().add(passwordField);
+		frame.setVisible(true);
 	}
 }

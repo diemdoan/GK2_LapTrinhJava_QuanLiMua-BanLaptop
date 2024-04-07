@@ -32,6 +32,15 @@ public class ChooseLaptop {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 32));
 		btnNewButton.setBounds(505, 668, 223, 50);
 		frame.getContentPane().add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new Customer();
+				frame.dispose();
+			}
+		});
 		
 		JButton btnChn = new JButton("Chọn");
 		btnChn.setFont(new Font("Tahoma", Font.PLAIN, 28));
@@ -42,11 +51,30 @@ public class ChooseLaptop {
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		btnNewButton_1.setBounds(39, 27, 161, 37);
 		frame.getContentPane().add(btnNewButton_1);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				new Login();
+				
+				
+			}
+		});
 		
 		JButton btnNewButton_1_1 = new JButton("Vào kho Laptop");
 		btnNewButton_1_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 23));
 		btnNewButton_1_1.setBounds(1006, 20, 232, 50);
 		frame.getContentPane().add(btnNewButton_1_1);
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new Storehouse();
+				frame.dispose();
+			}
+		});
+		frame.setVisible(true);
 	}
 
 }

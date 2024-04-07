@@ -1,6 +1,8 @@
 package gk2_QuanLiMuaBanLaptop;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -114,6 +116,16 @@ public class Storehouse {
 		btnTrLi.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnTrLi.setBounds(26, 22, 144, 32);
 		frame.getContentPane().add(btnTrLi);
+		btnTrLi.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new ChooseLaptop();
+				frame.dispose();
+			}
+		});
+		frame.setVisible(true);
 
 	}
 
