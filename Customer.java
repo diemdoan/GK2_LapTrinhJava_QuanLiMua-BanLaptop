@@ -1,14 +1,10 @@
 package gk2_QuanLiMuaBanLaptop;
 
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JTextField;
-import javax.swing.JButton;
 
 public class Customer {
 
@@ -44,7 +40,7 @@ public class Customer {
 
 		JLabel lblNewLabel = new JLabel("Điền Thông Tin Khách Hàng");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 34));
-		lblNewLabel.setBounds(243, 43, 525, 53);
+		lblNewLabel.setBounds(236, 43, 525, 53);
 		frame.getContentPane().add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("Tên khách hàng: ");
@@ -60,7 +56,7 @@ public class Customer {
 		tf_sdt = new JTextField();
 		tf_sdt.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tf_sdt.setColumns(10);
-		tf_sdt.setBounds(320, 204, 472, 34);
+		tf_sdt.setBounds(333, 204, 472, 34);
 		frame.getContentPane().add(tf_sdt);
 
 		JLabel lblNewLabel_1_1_1 = new JLabel("Địa chỉ: ");
@@ -71,7 +67,7 @@ public class Customer {
 		tf_diachi = new JTextField();
 		tf_diachi.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tf_diachi.setColumns(10);
-		tf_diachi.setBounds(321, 268, 471, 34);
+		tf_diachi.setBounds(333, 268, 471, 34);
 		frame.getContentPane().add(tf_diachi);
 
 		JButton btnNewButton = new JButton("Xuất hóa đơn");
@@ -87,7 +83,7 @@ public class Customer {
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField.setColumns(10);
-		textField.setBounds(320, 146, 472, 34);
+		textField.setBounds(333, 146, 472, 34);
 		frame.getContentPane().add(textField);
 		btnHy.addActionListener(new ActionListener() {
 			

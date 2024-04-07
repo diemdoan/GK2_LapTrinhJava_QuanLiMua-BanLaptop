@@ -39,9 +39,9 @@ public class CreateNewAccount {
 		lblNewLabel.setBounds(314, 11, 392, 68);
 		frame.getContentPane().add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Tên nhân viên: ");
+		JLabel lblNewLabel_1 = new JLabel("Tên nhân viên:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 21));
-		lblNewLabel_1.setBounds(155, 119, 159, 20);
+		lblNewLabel_1.setBounds(155, 119, 157, 20);
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		tf_tennhanvien = new JTextField();
@@ -58,7 +58,7 @@ public class CreateNewAccount {
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Số điện thoại: ");
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 21));
-		lblNewLabel_1_1.setBounds(155, 176, 159, 20);
+		lblNewLabel_1_1.setBounds(155, 179, 159, 25);
 		frame.getContentPane().add(lblNewLabel_1_1);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("CCCD: ");
