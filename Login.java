@@ -76,7 +76,7 @@ public class Login {
 				    	return;
 				    }
 				    if(mk.isEmpty()){
-				    	JOptionPane.showMessageDialog(null, "Không để trống tên mật khẩu", "Lỗi",JOptionPane.ERROR_MESSAGE);
+				    	JOptionPane.showMessageDialog(null, "Không để trống mật khẩu", "Lỗi",JOptionPane.ERROR_MESSAGE);
 				    	return;
 				    }
 				    if (resultSet.next()) {
