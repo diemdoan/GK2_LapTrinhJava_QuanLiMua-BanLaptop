@@ -64,20 +64,36 @@ public class Login {
 				try {
 					String tk = textField_tenDn.getText();
 					String mk = textField_mk.getText();
-					if (tk.isEmpty()) {
-						JOptionPane.showMessageDialog(null, "Không được để trống tài khoản", "Lỗi",
-								JOptionPane.OK_CANCEL_OPTION);
-						return;
-					}
-					if (mk.isEmpty()) {
-						JOptionPane.showMessageDialog(null, "Không được để trống mật khẩu", "Lỗi",
-								JOptionPane.ERROR_MESSAGE);
-						return;
-					}
-					new ChooseLaptop();
-					frame.dispose();
-				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(frame, ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+					
+				    Connection connection = ConnectSQL.getConnection();
+				    String sql = "SELECT * FROM nhanvien WHERE tendangnhap = ? AND matkhau = ?";
+				    PreparedStatement statement = connection.prepareStatement(sql);
+				    statement.setString(1, tk);
+				    statement.setString(2, mk);
+				    ResultSet resultSet = statement.executeQuery();
+				    if(tk.isEmpty()){
+				    	JOptionPane.showMessageDialog(null, "Không để trống tên đăng nhập", "Lỗi",JOptionPane.ERROR_MESSAGE);
+				    	return;
+				    }
+				    if(mk.isEmpty()){
+				    	JOptionPane.showMessageDialog(null, "Không để trống tên mật khẩu", "Lỗi",JOptionPane.ERROR_MESSAGE);
+				    	return;
+				    }
+				    if (resultSet.next()) {
+				        // Đăng nhập thành công, chuyển đến giao diện tiếp theo
+				        new ChooseLaptop();
+				        frame.dispose();
+				    } else {
+				        // Sai tên đăng nhập hoặc mật khẩu, hiển thị thông báo lỗi
+				        JOptionPane.showMessageDialog(null, "Tên đăng nhập hoặc mật khẩu không chính xác", "Lỗi", JOptionPane.ERROR_MESSAGE);
+				        return;
+				    }
+
+				    resultSet.close();
+				    statement.close();
+				    connection.close();
+				} catch (SQLException ex) {
+				    JOptionPane.showMessageDialog(frame, ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
 				}
 
 			}
