@@ -3,7 +3,7 @@ package gk2_QuanLiMuaBanLaptop;
 import java.awt.*;
 import javax.swing.*;
 
-import LibraryManagement.ConnectSQL;
+import gk2_QuanLiMuaBanLaptop.ConnectSQL;
 
 import java.awt.event.*;
 import java.sql.Connection;
@@ -108,64 +108,45 @@ public class CreateNewAccount {
 
 		bt_dangki.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String fullName = textField.getText();
-				String phone = textField_sdt.getText();
-				String birthYears = textField_namsinh.getText();
-				String sex = "";
-				if (chckbxNewCheckBox_Nam.isSelected()) {
-					sex = "Nam";
-				} else if (chckbxNewCheckBox_Nu.isSelected()) {
-					sex = "Nữ";
-				}
-				String cccd = textField_CD.getText();
-				String accName = textField_tenTK.getText();
+				String fullName = tf_tennhanvien.getText();
+				String phone = tf_sdt.getText();
+				String cccd = tf_cccd.getText();
+				String accName = tf_tendangnhap.getText();
 				String pass = new String(passwordField.getPassword());
 
-				if (fullName.isEmpty() || phone.isEmpty() || birthYears.isEmpty() || sex.isEmpty() || cccd.isEmpty()
-						|| accName.isEmpty() || pass.isEmpty()) {
-					JOptionPane.showMessageDialog(newAccFrame, "Vui lòng điền đầy đủ thông tin!");
-					return;
-				}
-
-				try {
-					int birthYear = Integer.parseInt(birthYears);
-					if (birthYear >= 2023) {
-						JOptionPane.showMessageDialog(newAccFrame, "Năm sinh phải bé hơn 2023!");
-						return;
-					}
-				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(newAccFrame, "Năm sinh phải là số!");
+				if (fullName.isEmpty() || phone.isEmpty() || cccd.isEmpty() || accName.isEmpty() || pass.isEmpty()) {
+					JOptionPane.showMessageDialog(frame, "Vui lòng điền đầy đủ thông tin!");
 					return;
 				}
 
 				try {
 					Long.parseLong(cccd);
 					if (cccd.length() != 12) {
-						JOptionPane.showMessageDialog(newAccFrame, "CCCD phải có 12 chữ số!");
+						JOptionPane.showMessageDialog(frame, "CCCD phải có 12 chữ số!");
 						return;
 					}
 				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(newAccFrame, "CCCD phải là số!");
+					JOptionPane.showMessageDialog(frame, "CCCD phải là số!");
 					return;
 				}
 				try {
 					Long.parseLong(phone);
 					if (phone.length() != 10) {
-						JOptionPane.showMessageDialog(newAccFrame, "Số điện thoại phải có 10 chữ số!");
+						JOptionPane.showMessageDialog(frame, "Số điện thoại phải có 10 chữ số!");
 						return;
 					}
 				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(newAccFrame, "Số điện thoại phải là số!");
+					JOptionPane.showMessageDialog(frame, "Số điện thoại phải là số!");
 					return;
 				}
 				try {
 					Connection conn = ConnectSQL.getConnection();
-					String checkDuplicateSql = "SELECT AccName FROM accounts WHERE AccName = ?";
+					String checkDuplicateSql = "SELECT tennhanvien FROM nhanvien WHERE tennhanvien = ?";
 					PreparedStatement checkStatement = conn.prepareStatement(checkDuplicateSql);
 					checkStatement.setString(1, accName);
 					ResultSet resultSet = checkStatement.executeQuery();
 					if (resultSet.next()) {
-						JOptionPane.showMessageDialog(newAccFrame, "Tên tài khoản đã được sử dụng!");
+						JOptionPane.showMessageDialog(frame, "Tên tài khoản đã được sử dụng!");
 						checkStatement.close();
 						conn.close();
 						return;
@@ -179,31 +160,18 @@ public class CreateNewAccount {
 
 				try {
 					Connection conn = ConnectSQL.getConnection();
-					String sql = "INSERT INTO accounts (FullName, CCCD, BirthYear, Phone, Sex, AccName, Pass, Role) VALUES (?, ?, ?, ?, ?, ?, ?, 'độc giả')";
+					String sql = "INSERT INTO nhanvien (tennhanvien, sdt, tendangnhap, matkhau, CCCD) VALUES (?, ?, ?, ?, ?)";
 					PreparedStatement statement = conn.prepareStatement(sql);
 					statement.setString(1, fullName);
-					statement.setString(2, cccd);
-					statement.setString(3, birthYears);
-					statement.setString(4, phone);
-					statement.setString(5, sex);
-					statement.setString(6, accName);
-					statement.setString(7, pass);
+					statement.setString(2, phone);
+					statement.setString(3, accName);
+					statement.setString(4, pass);
+					statement.setString(5, cccd);
 					statement.executeUpdate();
-
-					ResultSet generatedKeys = statement.executeQuery("SELECT LAST_INSERT_ID()");
-					if (generatedKeys.next()) {
-						int accountId = generatedKeys.getInt(1);
-						String cardSql = "INSERT INTO card (idCard) VALUES (?)";
-						PreparedStatement cardStatement = conn.prepareStatement(cardSql);
-						cardStatement.setInt(1, accountId);
-						cardStatement.executeUpdate();
-						cardStatement.close();
-
-					}
 
 					statement.close();
 					conn.close();
-					JOptionPane.showMessageDialog(newAccFrame, "Đăng ký thành công!");
+					JOptionPane.showMessageDialog(frame, "Đăng ký thành công!");
 					new Login();
 					frame.dispose();
 				} catch (SQLException ex) {
