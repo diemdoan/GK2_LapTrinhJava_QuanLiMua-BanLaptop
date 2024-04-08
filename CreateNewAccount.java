@@ -2,9 +2,6 @@ package gk2_QuanLiMuaBanLaptop;
 
 import java.awt.*;
 import javax.swing.*;
-
-import gk2_QuanLiMuaBanLaptop.ConnectSQL;
-
 import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
