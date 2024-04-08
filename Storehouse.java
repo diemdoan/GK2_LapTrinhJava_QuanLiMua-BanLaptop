@@ -11,12 +11,12 @@ import javax.swing.JTextField;
 
 public class Storehouse {
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField textField_tenLap;
+	private JTextField textField_nam;
+	private JTextField textField_hang;
+	private JTextField textField_cauhinh;
+	private JTextField textField_sl;
+	private JTextField textField_gia;
 
 	public static void main(String[] args) {
 		Storehouse window = new Storehouse();
@@ -46,66 +46,66 @@ public class Storehouse {
 		lblNewLabel_2.setBounds(48, 161, 144, 32);
 		frame.getContentPane().add(lblNewLabel_2);
 
+		textField_tenLap = new JTextField();
+		textField_tenLap.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		textField_tenLap.setBounds(203, 161, 268, 29);
+		frame.getContentPane().add(textField_tenLap);
+		textField_tenLap.setColumns(10);
+
 		JLabel lblNewLabel_2_1 = new JLabel("Năm sản xuất:");
 		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_2_1.setBounds(48, 216, 144, 32);
 		frame.getContentPane().add(lblNewLabel_2_1);
+
+		textField_nam = new JTextField();
+		textField_nam.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		textField_nam.setColumns(10);
+		textField_nam.setBounds(202, 219, 268, 29);
+		frame.getContentPane().add(textField_nam);
 
 		JLabel lblNewLabel_2_2 = new JLabel("Hãng:");
 		lblNewLabel_2_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_2_2.setBounds(48, 271, 144, 32);
 		frame.getContentPane().add(lblNewLabel_2_2);
 
+		textField_hang = new JTextField();
+		textField_hang.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		textField_hang.setColumns(10);
+		textField_hang.setBounds(203, 274, 268, 29);
+		frame.getContentPane().add(textField_hang);
+
 		JLabel lblNewLabel_2_3 = new JLabel("Cấu hình:");
 		lblNewLabel_2_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_2_3.setBounds(48, 326, 144, 32);
 		frame.getContentPane().add(lblNewLabel_2_3);
+
+		textField_cauhinh = new JTextField();
+		textField_cauhinh.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		textField_cauhinh.setColumns(10);
+		textField_cauhinh.setBounds(203, 329, 268, 29);
+		frame.getContentPane().add(textField_cauhinh);
 
 		JLabel lblNewLabel_2_4 = new JLabel("Số Lượng:");
 		lblNewLabel_2_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_2_4.setBounds(48, 381, 144, 32);
 		frame.getContentPane().add(lblNewLabel_2_4);
 
+		textField_sl = new JTextField();
+		textField_sl.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		textField_sl.setColumns(10);
+		textField_sl.setBounds(202, 384, 268, 29);
+		frame.getContentPane().add(textField_sl);
+
 		JLabel lblNewLabel_2_5 = new JLabel("Giá:");
 		lblNewLabel_2_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_2_5.setBounds(48, 436, 144, 32);
 		frame.getContentPane().add(lblNewLabel_2_5);
 
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		textField.setBounds(203, 161, 268, 29);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
-
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		textField_1.setColumns(10);
-		textField_1.setBounds(202, 219, 268, 29);
-		frame.getContentPane().add(textField_1);
-
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		textField_2.setColumns(10);
-		textField_2.setBounds(203, 274, 268, 29);
-		frame.getContentPane().add(textField_2);
-
-		textField_3 = new JTextField();
-		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		textField_3.setColumns(10);
-		textField_3.setBounds(203, 329, 268, 29);
-		frame.getContentPane().add(textField_3);
-
-		textField_4 = new JTextField();
-		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		textField_4.setColumns(10);
-		textField_4.setBounds(202, 384, 268, 29);
-		frame.getContentPane().add(textField_4);
-
-		textField_5 = new JTextField();
-		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		textField_5.setColumns(10);
-		textField_5.setBounds(202, 439, 268, 29);
-		frame.getContentPane().add(textField_5);
+		textField_gia = new JTextField();
+		textField_gia.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		textField_gia.setColumns(10);
+		textField_gia.setBounds(202, 439, 268, 29);
+		frame.getContentPane().add(textField_gia);
 
 		JButton btnNewButton = new JButton("Thêm");
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 20));

@@ -2,7 +2,14 @@ package gk2_QuanLiMuaBanLaptop;
 
 import java.awt.*;
 import javax.swing.*;
+
+import LibraryManagement.ConnectSQL;
+
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class CreateNewAccount {
 
@@ -33,87 +40,188 @@ public class CreateNewAccount {
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
-		
+
 		JLabel lblNewLabel = new JLabel("Đăng kí tài khoản mới");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblNewLabel.setBounds(314, 11, 392, 68);
 		frame.getContentPane().add(lblNewLabel);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Tên nhân viên:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 21));
 		lblNewLabel_1.setBounds(155, 119, 157, 20);
 		frame.getContentPane().add(lblNewLabel_1);
-		
+
 		tf_tennhanvien = new JTextField();
 		tf_tennhanvien.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tf_tennhanvien.setBounds(347, 112, 446, 35);
 		frame.getContentPane().add(tf_tennhanvien);
 		tf_tennhanvien.setColumns(10);
-		
+
+		JLabel lblNewLabel_1_1 = new JLabel("Số điện thoại: ");
+		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 21));
+		lblNewLabel_1_1.setBounds(155, 179, 159, 25);
+		frame.getContentPane().add(lblNewLabel_1_1);
+
 		tf_sdt = new JTextField();
 		tf_sdt.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tf_sdt.setColumns(10);
 		tf_sdt.setBounds(347, 169, 446, 35);
 		frame.getContentPane().add(tf_sdt);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("Số điện thoại: ");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 21));
-		lblNewLabel_1_1.setBounds(155, 179, 159, 25);
-		frame.getContentPane().add(lblNewLabel_1_1);
-		
+
 		JLabel lblNewLabel_1_1_1 = new JLabel("CCCD: ");
 		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 21));
 		lblNewLabel_1_1_1.setBounds(155, 229, 72, 20);
 		frame.getContentPane().add(lblNewLabel_1_1_1);
-		
+
 		tf_cccd = new JTextField();
 		tf_cccd.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tf_cccd.setColumns(10);
 		tf_cccd.setBounds(347, 222, 446, 35);
 		frame.getContentPane().add(tf_cccd);
-		
+
 		JLabel lblNewLabel_1_2 = new JLabel("Tên đăng nhập: ");
 		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.BOLD, 21));
 		lblNewLabel_1_2.setBounds(150, 336, 186, 28);
 		frame.getContentPane().add(lblNewLabel_1_2);
-		
+
 		tf_tendangnhap = new JTextField();
 		tf_tendangnhap.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		tf_tendangnhap.setColumns(10);
 		tf_tendangnhap.setBounds(347, 329, 446, 35);
 		frame.getContentPane().add(tf_tendangnhap);
-		
+
 		JLabel lblNewLabel_1_1_2 = new JLabel("Mật khẩu:");
 		lblNewLabel_1_1_2.setFont(new Font("Tahoma", Font.BOLD, 21));
 		lblNewLabel_1_1_2.setBounds(150, 397, 115, 28);
 		frame.getContentPane().add(lblNewLabel_1_1_2);
-		
+
+		passwordField = new JPasswordField();
+		passwordField.setFont(new Font("Tahoma", Font.BOLD, 20));
+		passwordField.setBounds(346, 390, 447, 35);
+		frame.getContentPane().add(passwordField);
+		frame.setVisible(true);
+
 		JButton bt_dangki = new JButton("Đăng kí");
-		bt_dangki.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			
-			new Login();
-			frame.dispose();
-			}});
 		bt_dangki.setFont(new Font("Tahoma", Font.BOLD, 22));
 		bt_dangki.setBounds(645, 496, 159, 35);
 		frame.getContentPane().add(bt_dangki);
-		
+
+		bt_dangki.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String fullName = textField.getText();
+				String phone = textField_sdt.getText();
+				String birthYears = textField_namsinh.getText();
+				String sex = "";
+				if (chckbxNewCheckBox_Nam.isSelected()) {
+					sex = "Nam";
+				} else if (chckbxNewCheckBox_Nu.isSelected()) {
+					sex = "Nữ";
+				}
+				String cccd = textField_CD.getText();
+				String accName = textField_tenTK.getText();
+				String pass = new String(passwordField.getPassword());
+
+				if (fullName.isEmpty() || phone.isEmpty() || birthYears.isEmpty() || sex.isEmpty() || cccd.isEmpty()
+						|| accName.isEmpty() || pass.isEmpty()) {
+					JOptionPane.showMessageDialog(newAccFrame, "Vui lòng điền đầy đủ thông tin!");
+					return;
+				}
+
+				try {
+					int birthYear = Integer.parseInt(birthYears);
+					if (birthYear >= 2023) {
+						JOptionPane.showMessageDialog(newAccFrame, "Năm sinh phải bé hơn 2023!");
+						return;
+					}
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(newAccFrame, "Năm sinh phải là số!");
+					return;
+				}
+
+				try {
+					Long.parseLong(cccd);
+					if (cccd.length() != 12) {
+						JOptionPane.showMessageDialog(newAccFrame, "CCCD phải có 12 chữ số!");
+						return;
+					}
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(newAccFrame, "CCCD phải là số!");
+					return;
+				}
+				try {
+					Long.parseLong(phone);
+					if (phone.length() != 10) {
+						JOptionPane.showMessageDialog(newAccFrame, "Số điện thoại phải có 10 chữ số!");
+						return;
+					}
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(newAccFrame, "Số điện thoại phải là số!");
+					return;
+				}
+				try {
+					Connection conn = ConnectSQL.getConnection();
+					String checkDuplicateSql = "SELECT AccName FROM accounts WHERE AccName = ?";
+					PreparedStatement checkStatement = conn.prepareStatement(checkDuplicateSql);
+					checkStatement.setString(1, accName);
+					ResultSet resultSet = checkStatement.executeQuery();
+					if (resultSet.next()) {
+						JOptionPane.showMessageDialog(newAccFrame, "Tên tài khoản đã được sử dụng!");
+						checkStatement.close();
+						conn.close();
+						return;
+					}
+					checkStatement.close();
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+					return;
+				}
+
+				try {
+					Connection conn = ConnectSQL.getConnection();
+					String sql = "INSERT INTO accounts (FullName, CCCD, BirthYear, Phone, Sex, AccName, Pass, Role) VALUES (?, ?, ?, ?, ?, ?, ?, 'độc giả')";
+					PreparedStatement statement = conn.prepareStatement(sql);
+					statement.setString(1, fullName);
+					statement.setString(2, cccd);
+					statement.setString(3, birthYears);
+					statement.setString(4, phone);
+					statement.setString(5, sex);
+					statement.setString(6, accName);
+					statement.setString(7, pass);
+					statement.executeUpdate();
+
+					ResultSet generatedKeys = statement.executeQuery("SELECT LAST_INSERT_ID()");
+					if (generatedKeys.next()) {
+						int accountId = generatedKeys.getInt(1);
+						String cardSql = "INSERT INTO card (idCard) VALUES (?)";
+						PreparedStatement cardStatement = conn.prepareStatement(cardSql);
+						cardStatement.setInt(1, accountId);
+						cardStatement.executeUpdate();
+						cardStatement.close();
+
+					}
+
+					statement.close();
+					conn.close();
+					JOptionPane.showMessageDialog(newAccFrame, "Đăng ký thành công!");
+					new Login();
+					frame.dispose();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		});
+
 		JButton bt_thoat = new JButton("Thoát");
+		bt_thoat.setFont(new Font("Tahoma", Font.BOLD, 22));
+		bt_thoat.setBounds(167, 496, 159, 35);
+		frame.getContentPane().add(bt_thoat);
 		bt_thoat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new Login();
 				frame.dispose();
 			}
 		});
-		bt_thoat.setFont(new Font("Tahoma", Font.BOLD, 22));
-		bt_thoat.setBounds(167, 496, 159, 35);
-		frame.getContentPane().add(bt_thoat);
-		
-		passwordField = new JPasswordField();
-		passwordField.setFont(new Font("Tahoma", Font.BOLD, 20));
-		passwordField.setBounds(346, 390, 447, 35);
-		frame.getContentPane().add(passwordField);
-		frame.setVisible(true);
+
 	}
 }
