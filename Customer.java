@@ -77,6 +77,14 @@ public class Customer {
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnNewButton.setBounds(647, 495, 207, 40);
 		frame.getContentPane().add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new Bill();
+				frame.dispose();
+			}
+		});
 
 		JButton btnHy = new JButton("Hủy");
 		btnHy.setFont(new Font("Tahoma", Font.BOLD, 20));

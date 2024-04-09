@@ -10,7 +10,7 @@ import java.sql.*;
 public class Login {
 	private JFrame frame;
 	private JTextField textField_tenDn;
-	private JTextField textField_mk;
+	private JPasswordField textField_mk;
 
 	public static void main(String[] args) {
 		Login logwindow = new Login();
@@ -46,7 +46,7 @@ public class Login {
 		lblNewLabel_1_1.setBounds(167, 225, 211, 52);
 		frame.getContentPane().add(lblNewLabel_1_1);
 
-		textField_mk = new JTextField();
+		textField_mk = new JPasswordField();
 		textField_mk.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		textField_mk.setColumns(10);
 		textField_mk.setBounds(447, 227, 415, 52);
@@ -63,7 +63,7 @@ public class Login {
 				// TODO Auto-generated method stub
 				try {
 					String tk = textField_tenDn.getText();
-					String mk = textField_mk.getText();
+					String mk = new String(textField_mk.getPassword());
 					
 				    Connection connection = ConnectSQL.getConnection();
 				    String sql = "SELECT * FROM nhanvien WHERE tendangnhap = ? AND matkhau = ?";
@@ -76,15 +76,13 @@ public class Login {
 				    	return;
 				    }
 				    if(mk.isEmpty()){
-				    	JOptionPane.showMessageDialog(null, "Không để trống tên mật khẩu", "Lỗi",JOptionPane.ERROR_MESSAGE);
+				    	JOptionPane.showMessageDialog(null, "Không để trống mật khẩu", "Lỗi",JOptionPane.ERROR_MESSAGE);
 				    	return;
 				    }
 				    if (resultSet.next()) {
-				        // Đăng nhập thành công, chuyển đến giao diện tiếp theo
 				        new ChooseLaptop();
 				        frame.dispose();
 				    } else {
-				        // Sai tên đăng nhập hoặc mật khẩu, hiển thị thông báo lỗi
 				        JOptionPane.showMessageDialog(null, "Tên đăng nhập hoặc mật khẩu không chính xác", "Lỗi", JOptionPane.ERROR_MESSAGE);
 				        return;
 				    }

@@ -29,6 +29,7 @@ public class Bill {
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
+		frame.setVisible(true);
 		
 		JLabel lblNewLabel = new JLabel("Hóa đơn");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 36));
