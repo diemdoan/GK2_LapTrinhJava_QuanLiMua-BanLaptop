@@ -1,29 +1,11 @@
 package gk2_QuanLiMuaBanLaptop;
 
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
-
-
-
-
-
-
-
 
 public class Storehouse {
 	private JFrame frame;
@@ -33,10 +15,7 @@ public class Storehouse {
 	private JTextField textField_cauhinh;
 	private JTextField textField_sl;
 	private JTextField textField_gia;
-	private JTable table;
-	private DefaultTableModel tableModel;
-	private int nextId;
-	
+	private DefaultTableModel model;
 
 	public static void main(String[] args) {
 		Storehouse window = new Storehouse();
@@ -50,6 +29,18 @@ public class Storehouse {
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
+		frame.setVisible(true);
+
+		JButton btnTrLi = new JButton("Trở lại");
+		btnTrLi.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnTrLi.setBounds(26, 22, 144, 32);
+		frame.getContentPane().add(btnTrLi);
+		btnTrLi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ChooseLaptop();
+				frame.dispose();
+			}
+		});
 
 		JLabel lblNewLabel = new JLabel("Kho Laptop");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 49));
@@ -131,193 +122,165 @@ public class Storehouse {
 		btnThem.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnThem.setBounds(162, 512, 132, 41);
 		frame.getContentPane().add(btnThem);
-		nextId=1;
-		
 
-        
-
-     
-
-		JButton btnTrLi = new JButton("Trở lại");
-		btnTrLi.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnTrLi.setBounds(26, 22, 144, 32);
-		frame.getContentPane().add(btnTrLi);
-		btnTrLi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new ChooseLaptop();
-				frame.dispose();
-			}
-		});
-		frame.setVisible(true);
-		
-		
-		
 		JScrollPane scrollPane = new JScrollPane();
-		
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(495, 94, 705, 419);
 		frame.getContentPane().add(scrollPane);
-
 		JTable table = new JTable();
 		scrollPane.setViewportView(table);
-//		DefaultTableModel model = new DefaultTableModel();
-//		model.addColumn("ID");
-//		model.addColumn("Tên Laptop");
-//		model.addColumn("Năm sản xuất");
-//		model.addColumn("Hãng");
-//		model.addColumn("Cấu hình");
-//		model.addColumn("Số lượng");
-//		model.addColumn("Giá");
-//		table.setModel(model);
-//		scrollPane.setViewportView(table);
-		
+
+		model = new DefaultTableModel();
+		model.addColumn("ID");
+		model.addColumn("Tên Laptop");
+		model.addColumn("Năm sản xuất");
+		model.addColumn("Hãng");
+		model.addColumn("Cấu hình");
+		model.addColumn("Số lượng");
+		model.addColumn("Giá");
+		table.setModel(model);
+		searchLaptop();
+
 		JButton btnSua = new JButton("Sửa");
 		btnSua.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnSua.setBounds(934, 546, 132, 41);
 		frame.getContentPane().add(btnSua);
 		btnSua.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent e) {
-		        int selectedRow = table.getSelectedRow();
-		        if (selectedRow >= 0) {
-		            Object selectedId = table.getValueAt(selectedRow, 0);
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int selectedRow = table.getSelectedRow();
+				if (selectedRow >= 0) {
+					Object selectedId = table.getValueAt(selectedRow, 0);
 
-		            EditFrame editFrame = new EditFrame(frame, selectedId.toString());
+					EditFrame editFrame = new EditFrame(frame, selectedId.toString());
 
-		            editFrame.setVisible(true);
-		            frame.setVisible(false);
-		        } else {
-		            JOptionPane.showMessageDialog(frame, "Vui lòng chọn một hàng để chỉnh sửa.", "Lỗi",
-		                    JOptionPane.ERROR_MESSAGE);
-		        }
-		    }
+					editFrame.setVisible(true);
+					frame.setVisible(false);
+				} else {
+					JOptionPane.showMessageDialog(frame, "Vui lòng chọn một hàng để chỉnh sửa.", "Lỗi",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
 		});
 
-		Connection connection = null;
-		Statement statement = null;
-		ResultSet resultSet = null;
-		try {
-		    connection = ConnectSQL.getConnection();
-		    statement = connection.createStatement();
-		    String selectQuery = "SELECT * FROM laptop;";
-		    resultSet = statement.executeQuery(selectQuery);
-
-		    DefaultTableModel tableModel = new DefaultTableModel();
-		    int columnCount = resultSet.getMetaData().getColumnCount();
-		    for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
-		        String columnName = resultSet.getMetaData().getColumnName(columnIndex);
-		        tableModel.addColumn(columnName);
-		    }
-
-		    while (resultSet.next()) {
-		        Object[] rowData = new Object[columnCount];
-		        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
-		            rowData[columnIndex - 1] = resultSet.getObject(columnIndex);
-		        }
-		        tableModel.addRow(rowData);
-		    }
-
-		    table.setModel(tableModel);
-		    
-		    
-		} catch (SQLException ex) {
-		    ex.printStackTrace();
-		}
-		//Nút Thêm Ở Đây
+		// Nút Thêm Ở Đây
 		btnThem.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        try {
-		            String tenLap = textField_tenLap.getText();
-		            String namsx = textField_nam.getText();
-		            String hang = textField_hang.getText();
-		            String cauHinh = textField_cauhinh.getText();
-		            String soLuong = textField_sl.getText();
-		            String gia = textField_gia.getText();
+			public void actionPerformed(ActionEvent e) {
 
-		            if (tenLap.isEmpty()) {
-		                JOptionPane.showMessageDialog(null, "Vui lòng nhập tên laptop!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-		                return;
-		            }
+				String tenLap = textField_tenLap.getText();
+				String namsx = textField_nam.getText();
+				String hang = textField_hang.getText();
+				String cauHinh = textField_cauhinh.getText();
+				String soLuong = textField_sl.getText();
+				String gia = textField_gia.getText();
 
-		            Connection connection = ConnectSQL.getConnection();
+				if (tenLap.isEmpty() || namsx.isEmpty() || hang.isEmpty() || cauHinh.isEmpty() || soLuong.isEmpty()
+						|| gia.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin!", "Lỗi",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				} else {
+					try {
+						int namSX = Integer.parseInt(namsx);
+						int sl = Integer.parseInt(soLuong);
+						int price = Integer.parseInt(gia);
 
-		            // Lấy giá trị ID_laptop lớn nhất hiện tại
-		            int maxIdLaptop = 0;
-		            String selectMaxIdQuery = "SELECT MAX(ID_laptop) FROM laptop";
-		            Statement selectMaxIdStatement = connection.createStatement();
-		            ResultSet maxIdResultSet = selectMaxIdStatement.executeQuery(selectMaxIdQuery);
-		            if (maxIdResultSet.next()) {
-		                maxIdLaptop = maxIdResultSet.getInt(1);
-		            }
-		            maxIdResultSet.close();
-		            selectMaxIdStatement.close();
+						if (namSX > 2023) {
+							JOptionPane.showMessageDialog(frame, "Năm xuất bản không được lớn hơn 2024.");
+						} else {
+							Connection conn = ConnectSQL.getConnection();
 
-		            // Đặt giá trị ID_laptop cho dòng mới
-		            int generatedMaLap = maxIdLaptop + 1;
+							String sql = "INSERT INTO laptop (ten, namsx, hang, cauhinh, soluong, gia) VALUES "
+									+ "( ?, ?, ?, ?, ?, ?)";
+							PreparedStatement statement = conn.prepareStatement(sql);
+							statement.setString(1, tenLap);
+							statement.setInt(2, namSX);
+							statement.setString(3, hang);
+							statement.setString(4, cauHinh);
+							statement.setInt(5, sl);
+							statement.setLong(6, price);
 
-		            String insertQuery = "INSERT INTO laptop (ID_laptop, ten, namsx, hang, cauhinh, soluong, gia) VALUES (?, ?, ?, ?, ?, ?, ?)";
-		            PreparedStatement statement = connection.prepareStatement(insertQuery);
-		            statement.setInt(1, generatedMaLap);
-		            statement.setString(2, tenLap);
-		            statement.setString(3, namsx);
-		            statement.setString(4, hang);
-		            statement.setString(5, cauHinh);
-		            statement.setString(6, soLuong);
-		            statement.setString(7, gia);
+							int rowsInserted = statement.executeUpdate();
+							if (rowsInserted > 0) {
+								JOptionPane.showMessageDialog(frame, "Thêm Laptop thành công.");
+								searchLaptop();
+								;
+							}
 
-		            statement.executeUpdate();
+							statement.close();
+							conn.close();
+						}
+					} catch (NumberFormatException ex) {
+						JOptionPane.showMessageDialog(frame, "Vui lòng nhập số cho năm sản xuất, giá và số lượng!");
+					} catch (SQLException ex) {
+						ex.printStackTrace();
+					}
+					searchLaptop();
+					;
+				}
 
-		            statement.close();
-		            connection.close();
-
-		            textField_tenLap.setText("");
-		            textField_nam.setText("");
-		            textField_hang.setText("");
-		            textField_cauhinh.setText("");
-		            textField_sl.setText("");
-		            textField_gia.setText("");
-
-		            // Cập nhật bảng hiển thị dữ liệu
-		            DefaultTableModel model = (DefaultTableModel) table.getModel();
-		            Object[] rowData = {generatedMaLap, tenLap, namsx, hang, cauHinh, soLuong, gia};
-		            model.addRow(rowData);
-		        } catch (Exception ex) {
-		            ex.printStackTrace();
-		        }
-		    }
+			}
 		});
+
 		JButton btnXoa = new JButton("Xóa");
-	    btnXoa.setFont(new Font("Tahoma", Font.BOLD, 20));
-	    btnXoa.setBounds(651, 546, 132, 41);
-	    frame.getContentPane().add(btnXoa);
-	    btnXoa.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	            int selectedRow = table.getSelectedRow();
-	            if (selectedRow >= 0) {
-	                Object selectedId = table.getValueAt(selectedRow, 0);
-	                try {
-	                    Connection connection = ConnectSQL.getConnection();
-	                    String deleteQuery = "DELETE FROM laptop WHERE ID_laptop = ?";
-	                    PreparedStatement statement = connection.prepareStatement(deleteQuery);
-	                    statement.setObject(1, selectedId);
-	                    statement.executeUpdate();
-	                    statement.close();
-	                    connection.close();
-
-	                    
-	                    DefaultTableModel model = (DefaultTableModel) table.getModel();
-	                    model.removeRow(selectedRow);
-	                } catch (SQLException ex) {
-	                    ex.printStackTrace();
-	                }
-	            } else {
-	                JOptionPane.showMessageDialog(frame, "Vui lòng chọn một hàng để xóa.", "Lỗi",
-	                        JOptionPane.ERROR_MESSAGE);
-	            }
-	        }
-	    });
+		btnXoa.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnXoa.setBounds(651, 546, 132, 41);
+		frame.getContentPane().add(btnXoa);
 		
-	}	
-}
+		btnXoa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedRow = table.getSelectedRow();
+				if (selectedRow >= 0) {
+					Object selectedId = table.getValueAt(selectedRow, 0);
+					try {
+						Connection connection = ConnectSQL.getConnection();
+						String deleteQuery = "DELETE FROM laptop WHERE ID_laptop = ?";
+						PreparedStatement statement = connection.prepareStatement(deleteQuery);
+						statement.setObject(1, selectedId);
+						statement.executeUpdate();
+						
+						statement.close();
+						connection.close();
 
+						searchLaptop();
+					} catch (SQLException ex) {
+						ex.printStackTrace();
+					}
+				} else {
+					JOptionPane.showMessageDialog(frame, "Vui lòng chọn một hàng để xóa.", "Lỗi",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+
+		});
+
+	}
+
+	// hàm đây để cập nhật lại bảng nè!!!!!!!!!!!!
+	public void searchLaptop() {
+		model.setRowCount(0);
+		try {
+			Connection conn = ConnectSQL.getConnection();
+			Statement statement = conn.createStatement();
+
+			String query = "SELECT * FROM laptop";
+			ResultSet resultSet = statement.executeQuery(query);
+
+			while (resultSet.next()) {
+				String ID = resultSet.getString("ID_laptop");
+				String ten = resultSet.getString("ten");
+				String nam = resultSet.getString("namsx");
+				String hang = resultSet.getString("hang");
+				String ch = resultSet.getString("cauhinh");
+				String soluong = resultSet.getString("soluong");
+				String gia = resultSet.getString("gia");
+
+				model.addRow(new Object[] { ID, ten, nam, hang, ch, soluong, gia + " VND" });
+			}
+
+			statement.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

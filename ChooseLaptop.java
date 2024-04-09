@@ -264,7 +264,7 @@ public class ChooseLaptop {
 				String soluong = resultSet.getString("soluong");
 				String gia = resultSet.getString("gia");
 
-				model.addRow(new Object[] { ID, ten, nam, hang, ch, soluong, gia });
+				model.addRow(new Object[] { ID, ten, nam, hang, ch, soluong, gia + " VND" });
 			}
 
 			statement.close();
@@ -284,7 +284,7 @@ public class ChooseLaptop {
 			Connection conn = ConnectSQL.getConnection();
 			Statement statement = conn.createStatement();
 
-			String query = "SELECT * FROM laptop WHERE ten = '" + tenlt + "'";
+			String query = "SELECT * FROM laptop WHERE ten LIKE '" + tenlt + "'";
 			ResultSet resultSet = statement.executeQuery(query);
 
 			while (resultSet.next()) {
@@ -296,7 +296,7 @@ public class ChooseLaptop {
 				String soluong = resultSet.getString("soluong");
 				String gia = resultSet.getString("gia");
 
-				model.addRow(new Object[] { ID, ten, nam, hang, ch, soluong, gia });
+				model.addRow(new Object[] { ID, ten, nam, hang, ch, soluong, gia + " VND"});
 			}
 
 			statement.close();
@@ -328,7 +328,7 @@ public class ChooseLaptop {
 				String soluong = resultSet.getString("soluong");
 				String gia = resultSet.getString("gia");
 
-				model.addRow(new Object[] { ID, ten, nam, hang, ch, soluong, gia });
+				model.addRow(new Object[] { ID, ten, nam, hang, ch, soluong, gia + " VND" });
 			}
 
 			statement.close();
@@ -360,7 +360,7 @@ public class ChooseLaptop {
 				String soluong = resultSet.getString("soluong");
 				String gia = resultSet.getString("gia");
 
-				model.addRow(new Object[] { ID, ten, nam, hang, ch, soluong, gia });
+				model.addRow(new Object[] { ID, ten, nam, hang, ch, soluong, gia + " VND" });
 			}
 
 			statement.close();

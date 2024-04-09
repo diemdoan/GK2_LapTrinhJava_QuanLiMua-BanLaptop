@@ -67,7 +67,6 @@ public class EditFrame extends JFrame {
         btnTho.setFont(new Font("Tahoma", Font.BOLD, 23));
         
 
-        // Add components to the frame
         getContentPane().add(idLabel);
         getContentPane().add(idTextField);
         getContentPane().add(tenLabel);
