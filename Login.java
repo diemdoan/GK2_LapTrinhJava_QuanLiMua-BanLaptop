@@ -24,16 +24,25 @@ public class Login {
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
+		
+		ImageIcon backgroundImage = new ImageIcon("C:\\Users\\NAM\\Downloads\\laptop.jpg");
+		JLabel backgroundLabel = new JLabel(backgroundImage);
+		backgroundLabel.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+		frame.setContentPane(backgroundLabel);
 
 		JLabel lblNewLabel = new JLabel("Shop Laptop Điềm và Nam");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 49));
 		lblNewLabel.setBounds(179, 10, 664, 66);
 		frame.getContentPane().add(lblNewLabel);
+		lblNewLabel.setBackground(Color.WHITE);
+		lblNewLabel.setOpaque(true);
 
 		JLabel lblNewLabel_1 = new JLabel("Tên đăng nhập:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 29));
-		lblNewLabel_1.setBounds(167, 136, 211, 52);
+		lblNewLabel_1.setBounds(167, 136, 211, 47);
 		frame.getContentPane().add(lblNewLabel_1);
+		lblNewLabel_1.setBackground(Color.WHITE);
+		lblNewLabel_1.setOpaque(true);
 		
 		textField_tenDn = new JTextField();
 		textField_tenDn.setFont(new Font("Tahoma", Font.PLAIN, 27));
@@ -43,8 +52,10 @@ public class Login {
 
 		JLabel lblNewLabel_1_1 = new JLabel("Mật khẩu:");
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 29));
-		lblNewLabel_1_1.setBounds(167, 225, 211, 52);
+		lblNewLabel_1_1.setBounds(167, 225, 211, 47);
 		frame.getContentPane().add(lblNewLabel_1_1);
+		lblNewLabel_1_1.setBackground(Color.white);
+		lblNewLabel_1_1.setOpaque(true);
 
 		textField_mk = new JPasswordField();
 		textField_mk.setFont(new Font("Tahoma", Font.PLAIN, 27));
@@ -99,8 +110,10 @@ public class Login {
 
 		JLabel lblNewLabel_1_1_1 = new JLabel("Bạn là nhân viên mới?");
 		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		lblNewLabel_1_1_1.setBounds(179, 415, 314, 52);
+		lblNewLabel_1_1_1.setBounds(179, 415, 281, 46);
 		frame.getContentPane().add(lblNewLabel_1_1_1);
+		lblNewLabel_1_1_1.setBackground(Color.WHITE);
+		lblNewLabel_1_1_1.setOpaque(true);
 
 		JButton btnngK = new JButton("Đăng kí ");
 		btnngK.setFont(new Font("Tahoma", Font.PLAIN, 29));
@@ -118,8 +131,10 @@ public class Login {
 
 		JLabel lblNewLabel_1_1_1_1 = new JLabel("Đăng kí tài khoản mới");
 		lblNewLabel_1_1_1_1.setFont(new Font("Tahoma", Font.ITALIC, 26));
-		lblNewLabel_1_1_1_1.setBounds(179, 471, 314, 52);
+		lblNewLabel_1_1_1_1.setBounds(179, 471, 281, 46);
 		frame.getContentPane().add(lblNewLabel_1_1_1_1);
+		lblNewLabel_1_1_1_1.setBackground(Color.WHITE);
+		lblNewLabel_1_1_1_1.setOpaque(true);
 
 		JButton btnThot = new JButton("Thoát");
 		btnThot.setFont(new Font("Tahoma", Font.PLAIN, 29));

@@ -37,6 +37,8 @@ public class CreateNewAccount {
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
+		
+		frame.getContentPane().setBackground(new Color(214, 224, 255));
 
 		JLabel lblNewLabel = new JLabel("Đăng kí tài khoản mới");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 30));

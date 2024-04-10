@@ -30,6 +30,11 @@ public class Storehouse {
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 		frame.setVisible(true);
+		
+		ImageIcon backgroundImage = new ImageIcon("C:\\Users\\NAM\\Downloads\\laptop.jpg");
+		JLabel backgroundLabel = new JLabel(backgroundImage);
+		backgroundLabel.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+		frame.setContentPane(backgroundLabel);
 
 		JButton btnTrLi = new JButton("Trở lại");
 		btnTrLi.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -44,18 +49,24 @@ public class Storehouse {
 
 		JLabel lblNewLabel = new JLabel("Kho Laptop");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 49));
-		lblNewLabel.setBounds(469, 10, 289, 73);
+		lblNewLabel.setBounds(469, 10, 289, 62);
 		frame.getContentPane().add(lblNewLabel);
+		lblNewLabel.setBackground(Color.WHITE);
+		lblNewLabel.setOpaque(true);
 
 		JLabel lblNewLabel_1 = new JLabel("Thêm Laptop mới");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 26));
 		lblNewLabel_1.setBounds(115, 106, 253, 32);
 		frame.getContentPane().add(lblNewLabel_1);
+		lblNewLabel_1.setBackground(Color.WHITE);
+		lblNewLabel_1.setOpaque(true);
 
 		JLabel lblNewLabel_2 = new JLabel("Tên Laptop:");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_2.setBounds(48, 161, 144, 32);
 		frame.getContentPane().add(lblNewLabel_2);
+		lblNewLabel_2.setBackground(Color.WHITE);
+		lblNewLabel_2.setOpaque(true);
 
 		textField_tenLap = new JTextField();
 		textField_tenLap.setFont(new Font("Tahoma", Font.PLAIN, 19));
@@ -67,6 +78,8 @@ public class Storehouse {
 		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_2_1.setBounds(48, 216, 144, 32);
 		frame.getContentPane().add(lblNewLabel_2_1);
+		lblNewLabel_2_1.setBackground(Color.WHITE);
+		lblNewLabel_2_1.setOpaque(true);
 
 		textField_nam = new JTextField();
 		textField_nam.setFont(new Font("Tahoma", Font.PLAIN, 19));
@@ -78,6 +91,8 @@ public class Storehouse {
 		lblNewLabel_2_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_2_2.setBounds(48, 271, 144, 32);
 		frame.getContentPane().add(lblNewLabel_2_2);
+		lblNewLabel_2_2.setBackground(Color.WHITE);
+		lblNewLabel_2_2.setOpaque(true);
 
 		textField_hang = new JTextField();
 		textField_hang.setFont(new Font("Tahoma", Font.PLAIN, 19));
@@ -89,6 +104,8 @@ public class Storehouse {
 		lblNewLabel_2_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_2_3.setBounds(48, 326, 144, 32);
 		frame.getContentPane().add(lblNewLabel_2_3);
+		lblNewLabel_2_3.setBackground(Color.WHITE);
+		lblNewLabel_2_3.setOpaque(true);
 
 		textField_cauhinh = new JTextField();
 		textField_cauhinh.setFont(new Font("Tahoma", Font.PLAIN, 19));
@@ -100,6 +117,8 @@ public class Storehouse {
 		lblNewLabel_2_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_2_4.setBounds(48, 381, 144, 32);
 		frame.getContentPane().add(lblNewLabel_2_4);
+		lblNewLabel_2_4.setBackground(Color.WHITE);
+		lblNewLabel_2_4.setOpaque(true);
 
 		textField_sl = new JTextField();
 		textField_sl.setFont(new Font("Tahoma", Font.PLAIN, 19));
@@ -111,6 +130,8 @@ public class Storehouse {
 		lblNewLabel_2_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_2_5.setBounds(48, 436, 144, 32);
 		frame.getContentPane().add(lblNewLabel_2_5);
+		lblNewLabel_2_5.setBackground(Color.WHITE);
+		lblNewLabel_2_5.setOpaque(true);
 
 		textField_gia = new JTextField();
 		textField_gia.setFont(new Font("Tahoma", Font.PLAIN, 19));

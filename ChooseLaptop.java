@@ -29,14 +29,21 @@ public class ChooseLaptop {
 		frame.setBounds(100, 100, 1272, 765);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
+		frame.setVisible(true);
+		
+		ImageIcon backgroundImage = new ImageIcon("C:\\Users\\NAM\\Downloads\\laptop.jpg");
+		JLabel backgroundLabel = new JLabel(backgroundImage);
+		backgroundLabel.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+		frame.setContentPane(backgroundLabel);
 
 		JLabel lblNewLabel = new JLabel("Shop Laptop Điềm và Nam");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 49));
 		lblNewLabel.setBounds(307, 10, 648, 50);
-		frame.getContentPane().add(lblNewLabel);
-		frame.setLocationRelativeTo(null);
-		frame.setResizable(false);
-		frame.setVisible(true);
+		frame.getContentPane().add(lblNewLabel);		
+		lblNewLabel.setBackground(Color.WHITE);
+		lblNewLabel.setOpaque(true);
 
 		JButton btnNewButton_1 = new JButton("Đăng xuất");
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 23));
@@ -67,11 +74,16 @@ public class ChooseLaptop {
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 21));
 		lblNewLabel_1.setBounds(71, 450, 170, 33);
 		frame.getContentPane().add(lblNewLabel_1);
+		lblNewLabel_1.setBackground(Color.WHITE);
+		lblNewLabel_1.setOpaque(true);
+		
 
 		JLabel lblNewLabel_2 = new JLabel("Tên Laptop");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblNewLabel_2.setBounds(36, 495, 93, 24);
 		frame.getContentPane().add(lblNewLabel_2);
+		lblNewLabel_2.setBackground(Color.WHITE);
+		lblNewLabel_2.setOpaque(true);
 
 		textField_tenlt = new JTextField();
 		textField_tenlt.setBounds(159, 497, 222, 27);
@@ -94,6 +106,8 @@ public class ChooseLaptop {
 		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblNewLabel_2_1.setBounds(36, 534, 93, 24);
 		frame.getContentPane().add(lblNewLabel_2_1);
+		lblNewLabel_2_1.setBackground(Color.WHITE);
+		lblNewLabel_2_1.setOpaque(true);
 
 		textField_hang = new JTextField();
 		textField_hang.setColumns(10);
@@ -116,6 +130,8 @@ public class ChooseLaptop {
 		lblNewLabel_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblNewLabel_2_1_1.setBounds(36, 570, 111, 24);
 		frame.getContentPane().add(lblNewLabel_2_1_1);
+		lblNewLabel_2_1_1.setBackground(Color.WHITE);
+		lblNewLabel_2_1_1.setOpaque(true);
 
 		textField_nsx = new JTextField();
 		textField_nsx.setColumns(10);
@@ -242,6 +258,8 @@ public class ChooseLaptop {
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 21));
 		lblNewLabel_1_1.setBounds(1109, 529, 111, 39);
 		frame.getContentPane().add(lblNewLabel_1_1);
+		lblNewLabel_1_1.setBackground(Color.WHITE);
+		lblNewLabel_1_1.setOpaque(true);
 
 //		JButton btninThngTin = new JButton("Điền thông tin ");
 //		btninThngTin.setFont(new Font("Tahoma", Font.PLAIN, 18));
