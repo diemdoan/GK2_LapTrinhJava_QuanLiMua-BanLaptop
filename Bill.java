@@ -109,7 +109,7 @@ public class Bill {
 		JButton btnNewButton = new JButton("Thoát");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ChooseLaptop();
+				
 				frame.dispose();
 			}
 		});

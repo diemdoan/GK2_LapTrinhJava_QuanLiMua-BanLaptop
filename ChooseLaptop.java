@@ -261,16 +261,15 @@ public class ChooseLaptop {
 		lblNewLabel_1_1.setBackground(Color.WHITE);
 		lblNewLabel_1_1.setOpaque(true);
 
-//		JButton btninThngTin = new JButton("Điền thông tin ");
-//		btninThngTin.setFont(new Font("Tahoma", Font.PLAIN, 18));
-//		btninThngTin.setBounds(1080, 628, 168, 50);
-//		frame.getContentPane().add(btninThngTin);
-//		btninThngTin.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				new Customer();
-//				frame.dispose();
-//			}
-//		});
+		JButton btninThngTin = new JButton("Điền thông tin ");
+		btninThngTin.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btninThngTin.setBounds(1080, 628, 168, 50);
+		frame.getContentPane().add(btninThngTin);
+		btninThngTin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new Customer();
+			}
+		});
 
 		JButton btn_rfr = new JButton("Refresh");
 		btn_rfr.setFont(new Font("Tahoma", Font.PLAIN, 15));

@@ -93,7 +93,7 @@ public class Customer {
 
 		btnHy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ChooseLaptop();
+				
 				frame.dispose();
 			}
 		});

@@ -24,7 +24,7 @@ public class Login {
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
-		
+
 		ImageIcon backgroundImage = new ImageIcon("C:\\Users\\NAM\\Downloads\\laptop.jpg");
 		JLabel backgroundLabel = new JLabel(backgroundImage);
 		backgroundLabel.setBounds(0, 0, frame.getWidth(), frame.getHeight());
@@ -41,13 +41,9 @@ public class Login {
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 29));
 		lblNewLabel_1.setBounds(167, 136, 211, 47);
 		frame.getContentPane().add(lblNewLabel_1);
-<<<<<<< HEAD
 
-=======
 		lblNewLabel_1.setBackground(Color.WHITE);
 		lblNewLabel_1.setOpaque(true);
-		
->>>>>>> 13447e602158f2f98ae501307dcd753aed4ebb38
 		textField_tenDn = new JTextField();
 		textField_tenDn.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		textField_tenDn.setBounds(447, 138, 415, 52);
