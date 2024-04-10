@@ -78,10 +78,9 @@ public class Customer {
 		btnNewButton.setBounds(647, 495, 207, 40);
 		frame.getContentPane().add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
-			
-			@Override
+
 			public void actionPerformed(ActionEvent e) {
-				new Bill();
+
 				frame.dispose();
 			}
 		});
@@ -93,7 +92,7 @@ public class Customer {
 
 		btnHy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				frame.dispose();
 			}
 		});

@@ -32,7 +32,7 @@ public class ChooseLaptop {
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 		frame.setVisible(true);
-		
+
 		ImageIcon backgroundImage = new ImageIcon("C:\\Users\\NAM\\Downloads\\laptop.jpg");
 		JLabel backgroundLabel = new JLabel(backgroundImage);
 		backgroundLabel.setBounds(0, 0, frame.getWidth(), frame.getHeight());
@@ -41,7 +41,7 @@ public class ChooseLaptop {
 		JLabel lblNewLabel = new JLabel("Shop Laptop Điềm và Nam");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 49));
 		lblNewLabel.setBounds(307, 10, 648, 50);
-		frame.getContentPane().add(lblNewLabel);		
+		frame.getContentPane().add(lblNewLabel);
 		lblNewLabel.setBackground(Color.WHITE);
 		lblNewLabel.setOpaque(true);
 
@@ -76,7 +76,6 @@ public class ChooseLaptop {
 		frame.getContentPane().add(lblNewLabel_1);
 		lblNewLabel_1.setBackground(Color.WHITE);
 		lblNewLabel_1.setOpaque(true);
-		
 
 		JLabel lblNewLabel_2 = new JLabel("Tên Laptop");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 17));
