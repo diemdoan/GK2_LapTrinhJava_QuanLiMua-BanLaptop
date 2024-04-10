@@ -34,7 +34,7 @@ public class Login {
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 29));
 		lblNewLabel_1.setBounds(167, 136, 211, 52);
 		frame.getContentPane().add(lblNewLabel_1);
-		
+
 		textField_tenDn = new JTextField();
 		textField_tenDn.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		textField_tenDn.setBounds(447, 138, 415, 52);
@@ -64,34 +64,37 @@ public class Login {
 				try {
 					String tk = textField_tenDn.getText();
 					String mk = new String(textField_mk.getPassword());
-					
-				    Connection connection = ConnectSQL.getConnection();
-				    String sql = "SELECT * FROM nhanvien WHERE tendangnhap = ? AND matkhau = ?";
-				    PreparedStatement statement = connection.prepareStatement(sql);
-				    statement.setString(1, tk);
-				    statement.setString(2, mk);
-				    ResultSet resultSet = statement.executeQuery();
-				    if(tk.isEmpty()){
-				    	JOptionPane.showMessageDialog(null, "Không để trống tên đăng nhập", "Lỗi",JOptionPane.ERROR_MESSAGE);
-				    	return;
-				    }
-				    if(mk.isEmpty()){
-				    	JOptionPane.showMessageDialog(null, "Không để trống mật khẩu", "Lỗi",JOptionPane.ERROR_MESSAGE);
-				    	return;
-				    }
-				    if (resultSet.next()) {
-				        new ChooseLaptop();
-				        frame.dispose();
-				    } else {
-				        JOptionPane.showMessageDialog(null, "Tên đăng nhập hoặc mật khẩu không chính xác", "Lỗi", JOptionPane.ERROR_MESSAGE);
-				        return;
-				    }
 
-				    resultSet.close();
-				    statement.close();
-				    connection.close();
+					Connection connection = ConnectSQL.getConnection();
+					String sql = "SELECT * FROM nhanvien WHERE tendangnhap = ? AND matkhau = ?";
+					PreparedStatement statement = connection.prepareStatement(sql);
+					statement.setString(1, tk);
+					statement.setString(2, mk);
+					ResultSet resultSet = statement.executeQuery();
+					if (tk.isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Không để trống tên đăng nhập", "Lỗi",
+								JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					if (mk.isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Không để trống mật khẩu", "Lỗi",
+								JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					if (resultSet.next()) {
+						new ChooseLaptop();
+						frame.dispose();
+					} else {
+						JOptionPane.showMessageDialog(null, "Tên đăng nhập hoặc mật khẩu không chính xác", "Lỗi",
+								JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+
+					resultSet.close();
+					statement.close();
+					connection.close();
 				} catch (SQLException ex) {
-				    JOptionPane.showMessageDialog(frame, ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
 				}
 
 			}
