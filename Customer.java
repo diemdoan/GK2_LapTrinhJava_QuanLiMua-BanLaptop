@@ -2,16 +2,21 @@ package gk2_QuanLiMuaBanLaptop;
 
 import java.awt.EventQueue;
 import javax.swing.*;
+
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 
 public class Customer {
+	
 
 	private JFrame frame;
 	private JTextField tf_sdt;
 	private JTextField tf_diachi;
 	private JTextField textField_ten;
+
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -34,6 +39,7 @@ public class Customer {
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 		frame.setVisible(true);
+		
 
 		JLabel lblNewLabel = new JLabel("Điền Thông Tin Khách Hàng");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 34));
@@ -80,7 +86,9 @@ public class Customer {
 		btnNewButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-
+				writeToFile();
+				
+				new Bill();
 				frame.dispose();
 			}
 		});
@@ -98,4 +106,30 @@ public class Customer {
 		});
 
 	}
+	//Hàm viết vô file
+	public void writeToFile() {
+	    String tenKH = textField_ten.getText();
+	    String sdt = tf_sdt.getText();
+	    String diachi = tf_diachi.getText();
+
+	    String filePath = "C:\\Users\\NAM\\Desktop\\Hóa Đơn\\Bill.txt";
+
+	    try {
+	        FileWriter writer = new FileWriter(filePath, true);
+
+	        writer.write("Thông tin khách hàng:\n");
+	        writer.write("Tên khách hàng: " + tenKH + "\n");
+	        writer.write("Số điện thoại: " + sdt + "\n");
+	        writer.write("Địa chỉ: " + diachi + "\n");
+	        writer.write("\n"); 
+	        writer.close();
+
+	        JOptionPane.showMessageDialog(frame, "Ghi dữ liệu vào file thành công!");
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        JOptionPane.showMessageDialog(frame, "Lỗi khi ghi dữ liệu vào file!");
+	    }
+	}
+	
+	
 }

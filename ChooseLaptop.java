@@ -4,6 +4,8 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
 import java.awt.event.ActionEvent;
 import java.sql.*;
 
@@ -13,11 +15,11 @@ public class ChooseLaptop {
 	private JTextField textField_tenlt;
 	private JTextField textField_nsx;
 	private JTextField textField_hang;
-	private JTable table;
-	private DefaultTableModel model;
-	private JTable table_tt;
-	private DefaultTableModel model_tt;
-	private JTextField textField_tong;
+	public JTable table;
+	public DefaultTableModel model;
+	public JTable table_tt;
+	public DefaultTableModel model_tt;
+	public JTextField textField_tong;
 
 	public static void main(String[] args) {
 		ChooseLaptop window = new ChooseLaptop();
@@ -266,6 +268,7 @@ public class ChooseLaptop {
 		frame.getContentPane().add(btninThngTin);
 		btninThngTin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				writeToFile();
 				new Customer();
 			}
 		});
@@ -458,4 +461,34 @@ public class ChooseLaptop {
 			e.printStackTrace();
 		}
 	}
+	//Hàm viết vô file
+	//Đổi đường dẫn trước khi chạy
+
+	private void writeToFile() {
+	    try {
+	        
+	        File file = new File("C:\\Users\\NAM\\Desktop\\Hóa Đơn\\Bill.txt");
+	        if (!file.exists()) {
+	            file.createNewFile();
+	        }
+
+	        
+	        FileWriter writer = new FileWriter(file);
+	        writer.write("Danh sách laptop đã chọn:\n");
+	        double totalPrice = 0;
+	        for (int i = 0; i < model_tt.getRowCount(); i++) {
+	            String id = (String) model_tt.getValueAt(i, 0);
+	            String name = (String) model_tt.getValueAt(i, 1);
+	            int quantity = (int) model_tt.getValueAt(i, 2);
+	            double price = (double) model_tt.getValueAt(i, 3);
+	            writer.write("ID: " + id + ", Tên: " + name + ", Số lượng: " + quantity + ", Giá: " + price + "\n");
+	            totalPrice += price * quantity;
+	        }
+	        writer.write("\nTổng tiền: " + totalPrice + " VND\n");
+	        writer.close();
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    }
+	}
+	
 }

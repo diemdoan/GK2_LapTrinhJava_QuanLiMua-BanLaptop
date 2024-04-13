@@ -194,50 +194,71 @@ public class Storehouse {
 				String soLuong = textField_sl.getText();
 				String gia = textField_gia.getText();
 
-				if (tenLap.isEmpty() || namsx.isEmpty() || hang.isEmpty() || cauHinh.isEmpty() || soLuong.isEmpty()
-						|| gia.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin!", "Lỗi",
-							JOptionPane.ERROR_MESSAGE);
-					return;
+				if (tenLap.isEmpty() || namsx.isEmpty() || hang.isEmpty() || cauHinh.isEmpty() || soLuong.isEmpty() || gia.isEmpty()) {
+				    JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+				    return;
 				} else {
-					try {
-						int namSX = Integer.parseInt(namsx);
-						int sl = Integer.parseInt(soLuong);
-						int price = Integer.parseInt(gia);
+				    try {
+				        int namSX = Integer.parseInt(namsx);
+				        int sl = Integer.parseInt(soLuong);
+				        int price = Integer.parseInt(gia);
 
-						if (namSX > 2023) {
-							JOptionPane.showMessageDialog(frame, "Năm xuất bản không được lớn hơn 2024.");
-						} else {
-							Connection conn = ConnectSQL.getConnection();
+				        if (namSX > 2023) {
+				            JOptionPane.showMessageDialog(frame, "Năm xuất bản không được lớn hơn 2024.");
+				        } else {
+				            Connection conn = ConnectSQL.getConnection();
 
-							String sql = "INSERT INTO laptop (ten, namsx, hang, cauhinh, soluong, gia) VALUES "
-									+ "( ?, ?, ?, ?, ?, ?)";
-							PreparedStatement statement = conn.prepareStatement(sql);
-							statement.setString(1, tenLap);
-							statement.setInt(2, namSX);
-							statement.setString(3, hang);
-							statement.setString(4, cauHinh);
-							statement.setInt(5, sl);
-							statement.setLong(6, price);
+				            // Check có chưa
+				            String checkQuery = "SELECT * FROM laptop WHERE ten = ? AND hang = ? AND namsx = ?";
+				            PreparedStatement checkStatement = conn.prepareStatement(checkQuery);
+				            checkStatement.setString(1, tenLap);
+				            checkStatement.setString(2, hang);
+				            checkStatement.setString(3, namsx);
+				            ResultSet checkResult = checkStatement.executeQuery();
 
-							int rowsInserted = statement.executeUpdate();
-							if (rowsInserted > 0) {
-								JOptionPane.showMessageDialog(frame, "Thêm Laptop thành công.");
-								searchLaptop();
-								;
-							}
+				            if (checkResult.next()) {
+				                // Cộng vô số lượng
+				                int laptopDaTonTai = checkResult.getInt("soluong");
+				                int themvaoSL = laptopDaTonTai + sl;
 
-							statement.close();
-							conn.close();
-						}
-					} catch (NumberFormatException ex) {
-						JOptionPane.showMessageDialog(frame, "Vui lòng nhập số cho năm sản xuất, giá và số lượng!");
-					} catch (SQLException ex) {
-						ex.printStackTrace();
-					}
+				                String updateQuery = "UPDATE laptop SET soluong = ? WHERE ten = ? AND hang = ? AND namsx = ?";
+				                PreparedStatement updateStatement = conn.prepareStatement(updateQuery);
+				                updateStatement.setInt(1, themvaoSL);
+				                updateStatement.setString(2, tenLap);
+				                updateStatement.setString(3, hang);
+				                updateStatement.setString(4, namsx);
+				                updateStatement.executeUpdate();
+
+				                JOptionPane.showMessageDialog(frame, "Cập nhật số lượng thành công.");
+				                searchLaptop();
+				            } else {
+				                // Đoạn thêm mới
+				                String insertQuery = "INSERT INTO laptop (ten, namsx, hang, cauhinh, soluong, gia) VALUES (?, ?, ?, ?, ?, ?)";
+				                PreparedStatement insertStatement = conn.prepareStatement(insertQuery);
+				                insertStatement.setString(1, tenLap);
+				                insertStatement.setInt(2, namSX);
+				                insertStatement.setString(3, hang);
+				                insertStatement.setString(4, cauHinh);
+				                insertStatement.setInt(5, sl);
+				                insertStatement.setLong(6, price);
+				                insertStatement.executeUpdate();
+
+				                JOptionPane.showMessageDialog(frame, "Thêm Laptop thành công.");
+				                searchLaptop();
+				            }
+
+				            checkStatement.close();
+				            conn.close();
+				        }
+				    } catch (NumberFormatException ex) {
+				        JOptionPane.showMessageDialog(frame, "Vui lòng nhập số cho năm sản xuất, giá và số lượng!");
+				    } catch (SQLException ex) {
+				        ex.printStackTrace();
+				    }
+				}
 					searchLaptop();
 					;
-				}
+				
 
 			}
 		});
