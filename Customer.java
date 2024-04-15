@@ -16,6 +16,9 @@ public class Customer {
 	private JTextField tf_sdt;
 	private JTextField tf_diachi;
 	private JTextField textField_ten;
+	private JTextField tf_email;
+	private JTextField tf_ngaysinh;
+	private JTextField tf_soluongmaymua;
 
 
 	public static void main(String[] args) {
@@ -70,13 +73,13 @@ public class Customer {
 
 		JLabel lblNewLabel_1_1_1 = new JLabel("Địa chỉ: ");
 		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 21));
-		lblNewLabel_1_1_1.setBounds(139, 264, 91, 40);
+		lblNewLabel_1_1_1.setBounds(139, 314, 91, 40);
 		frame.getContentPane().add(lblNewLabel_1_1_1);
 
 		tf_diachi = new JTextField();
 		tf_diachi.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tf_diachi.setColumns(10);
-		tf_diachi.setBounds(333, 268, 471, 34);
+		tf_diachi.setBounds(334, 318, 471, 34);
 		frame.getContentPane().add(tf_diachi);
 
 		JButton btnNewButton = new JButton("Xuất hóa đơn");
@@ -97,6 +100,39 @@ public class Customer {
 		btnHy.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnHy.setBounds(139, 495, 207, 40);
 		frame.getContentPane().add(btnHy);
+		
+		JLabel lblNewLabel_1_1_1_1 = new JLabel("Email: ");
+		lblNewLabel_1_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 21));
+		lblNewLabel_1_1_1_1.setBounds(139, 263, 91, 40);
+		frame.getContentPane().add(lblNewLabel_1_1_1_1);
+		
+		tf_email = new JTextField();
+		tf_email.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		tf_email.setColumns(10);
+		tf_email.setBounds(333, 267, 471, 34);
+		frame.getContentPane().add(tf_email);
+		
+		JLabel lblNewLabel_1_1_1_2 = new JLabel("Ngày sinh:");
+		lblNewLabel_1_1_1_2.setFont(new Font("Tahoma", Font.BOLD, 21));
+		lblNewLabel_1_1_1_2.setBounds(139, 365, 131, 40);
+		frame.getContentPane().add(lblNewLabel_1_1_1_2);
+		
+		tf_ngaysinh = new JTextField();
+		tf_ngaysinh.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		tf_ngaysinh.setColumns(10);
+		tf_ngaysinh.setBounds(333, 363, 471, 34);
+		frame.getContentPane().add(tf_ngaysinh);
+		
+		JLabel lblNewLabel_1_1_1_2_1 = new JLabel("Số lượng máy mua: ");
+		lblNewLabel_1_1_1_2_1.setFont(new Font("Tahoma", Font.BOLD, 21));
+		lblNewLabel_1_1_1_2_1.setBounds(139, 417, 237, 40);
+		frame.getContentPane().add(lblNewLabel_1_1_1_2_1);
+		
+		tf_soluongmaymua = new JTextField();
+		tf_soluongmaymua.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		tf_soluongmaymua.setColumns(10);
+		tf_soluongmaymua.setBounds(386, 423, 196, 34);
+		frame.getContentPane().add(tf_soluongmaymua);
 
 		btnHy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -107,6 +143,7 @@ public class Customer {
 
 	}
 	//Hàm viết vô file
+	//Đổi đường dẫn trước khi chạy
 	public void writeToFile() {
 	    String tenKH = textField_ten.getText();
 	    String sdt = tf_sdt.getText();
@@ -130,6 +167,4 @@ public class Customer {
 	        JOptionPane.showMessageDialog(frame, "Lỗi khi ghi dữ liệu vào file!");
 	    }
 	}
-	
-	
 }
