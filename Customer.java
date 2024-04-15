@@ -3,14 +3,15 @@ package gk2_QuanLiMuaBanLaptop;
 import java.awt.EventQueue;
 import javax.swing.*;
 
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 
 public class Customer {
-	
 
 	private JFrame frame;
 	private JTextField tf_sdt;
@@ -19,7 +20,6 @@ public class Customer {
 	private JTextField tf_email;
 	private JTextField tf_ngaysinh;
 	private JTextField tf_soluongmaymua;
-
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -42,7 +42,6 @@ public class Customer {
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 		frame.setVisible(true);
-		
 
 		JLabel lblNewLabel = new JLabel("Điền Thông Tin Khách Hàng");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 34));
@@ -90,7 +89,7 @@ public class Customer {
 
 			public void actionPerformed(ActionEvent e) {
 				writeToFile();
-				
+				writeDataToDatabase();
 				new Bill();
 				frame.dispose();
 			}
@@ -100,34 +99,34 @@ public class Customer {
 		btnHy.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnHy.setBounds(139, 495, 207, 40);
 		frame.getContentPane().add(btnHy);
-		
+
 		JLabel lblNewLabel_1_1_1_1 = new JLabel("Email: ");
 		lblNewLabel_1_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 21));
 		lblNewLabel_1_1_1_1.setBounds(139, 263, 91, 40);
 		frame.getContentPane().add(lblNewLabel_1_1_1_1);
-		
+
 		tf_email = new JTextField();
 		tf_email.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tf_email.setColumns(10);
 		tf_email.setBounds(333, 267, 471, 34);
 		frame.getContentPane().add(tf_email);
-		
+
 		JLabel lblNewLabel_1_1_1_2 = new JLabel("Ngày sinh:");
 		lblNewLabel_1_1_1_2.setFont(new Font("Tahoma", Font.BOLD, 21));
 		lblNewLabel_1_1_1_2.setBounds(139, 365, 131, 40);
 		frame.getContentPane().add(lblNewLabel_1_1_1_2);
-		
+
 		tf_ngaysinh = new JTextField();
 		tf_ngaysinh.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tf_ngaysinh.setColumns(10);
 		tf_ngaysinh.setBounds(333, 363, 471, 34);
 		frame.getContentPane().add(tf_ngaysinh);
-		
+
 		JLabel lblNewLabel_1_1_1_2_1 = new JLabel("Số lượng máy mua: ");
 		lblNewLabel_1_1_1_2_1.setFont(new Font("Tahoma", Font.BOLD, 21));
 		lblNewLabel_1_1_1_2_1.setBounds(139, 417, 237, 40);
 		frame.getContentPane().add(lblNewLabel_1_1_1_2_1);
-		
+
 		tf_soluongmaymua = new JTextField();
 		tf_soluongmaymua.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tf_soluongmaymua.setColumns(10);
@@ -142,29 +141,70 @@ public class Customer {
 		});
 
 	}
-	//Hàm viết vô file
-	//Đổi đường dẫn trước khi chạy
+
+	// Hàm viết vô file
+	// Đổi đường dẫn trước khi chạy
 	public void writeToFile() {
-	    String tenKH = textField_ten.getText();
-	    String sdt = tf_sdt.getText();
-	    String diachi = tf_diachi.getText();
+		String tenKH = textField_ten.getText();
+		String sdt = tf_sdt.getText();
+		String diachi = tf_diachi.getText();
+		String email = tf_email.getText();
+		String ngaysinh = tf_ngaysinh.getText();
+		String soluongmaymua = tf_soluongmaymua.getText();
 
-	    String filePath = "C:\\Users\\NAM\\Desktop\\Hóa Đơn\\Bill.txt";
+		String filePath = "C:\\Users\\NAM\\Desktop\\Hóa Đơn\\Bill.txt";
 
-	    try {
-	        FileWriter writer = new FileWriter(filePath, true);
+		try {
+			FileWriter writer = new FileWriter(filePath, true);
 
-	        writer.write("Thông tin khách hàng:\n");
-	        writer.write("Tên khách hàng: " + tenKH + "\n");
-	        writer.write("Số điện thoại: " + sdt + "\n");
-	        writer.write("Địa chỉ: " + diachi + "\n");
-	        writer.write("\n"); 
-	        writer.close();
+			writer.write("Thông tin khách hàng:\n");
+			writer.write("Tên khách hàng: " + tenKH + "\n");
+			writer.write("Số điện thoại: " + sdt + "\n");
+			writer.write("Email: " + email + "\n");
+			writer.write("Địa chỉ: " + diachi + "\n");
+			writer.write("Ngày Sinh: " + ngaysinh + "\n");
+			writer.write("Số lượng máy mua: " + soluongmaymua + "\n");
+			writer.write("\n");
+			writer.close();
 
-	        JOptionPane.showMessageDialog(frame, "Ghi dữ liệu vào file thành công!");
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        JOptionPane.showMessageDialog(frame, "Lỗi khi ghi dữ liệu vào file!");
-	    }
+			JOptionPane.showMessageDialog(frame, "Ghi dữ liệu vào file thành công!");
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(frame, "Lỗi khi ghi dữ liệu vào file!");
+		}
+	}
+
+	public void writeDataToDatabase() {
+		String tenKH = textField_ten.getText();
+		String sdt = tf_sdt.getText();
+		String diachi = tf_diachi.getText();
+		String email = tf_email.getText();
+		String ngaysinh = tf_ngaysinh.getText();
+		String soluongmaymua = tf_soluongmaymua.getText();
+
+		try (Connection conn = ConnectSQL.getConnection()) {
+			// Tạo câu lệnh SQL để chèn dữ liệu vào bảng khachhang
+			String sql = "INSERT INTO khachhang (tenkhachhang, sdt, diachi, email, ngaysinh, soluongmaymua) VALUES (?, ?, ?, ?, ?, ?)";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+			// Đặt các giá trị tham số cho câu lệnh SQL
+
+			statement.setString(1, tenKH);
+			statement.setString(2, sdt);
+			statement.setString(3, diachi);
+			statement.setString(4, email);
+			statement.setString(5, ngaysinh);
+			statement.setString(6, soluongmaymua);
+
+			// Thực thi câu lệnh SQL để chèn dữ liệu
+			statement.executeUpdate();
+
+			
+
+			JOptionPane.showMessageDialog(frame, "Ghi dữ liệu vào cơ sở dữ liệu thành công!");
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(frame, "Lỗi khi ghi dữ liệu vào cơ sở dữ liệu!");
+		}
 	}
 }
