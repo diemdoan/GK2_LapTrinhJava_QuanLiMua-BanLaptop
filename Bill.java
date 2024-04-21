@@ -53,7 +53,7 @@ public class Bill {
 		//Đoạn ni xuất từ file
 		//Trước khi chạy nhớ đổi đường dẫn
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\NAM\\Desktop\\Hóa Đơn\\Bill.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader("E:\\javafile\\Bill.txt"));
 			String line;
 			
 			StringBuilder billText = new StringBuilder();

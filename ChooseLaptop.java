@@ -78,6 +78,17 @@ public class ChooseLaptop {
 		frame.getContentPane().add(lblNewLabel_1);
 		lblNewLabel_1.setBackground(Color.WHITE);
 		lblNewLabel_1.setOpaque(true);
+		
+		JButton btn_ten_1 = new JButton("Thống kê");
+		btn_ten_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btn_ten_1.setBounds(266, 454, 111, 30);
+		frame.getContentPane().add(btn_ten_1);
+		btn_ten_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ThongKe();
+				frame.dispose();
+			}
+		});
 
 		JLabel lblNewLabel_2 = new JLabel("Tên Laptop");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -467,7 +478,8 @@ public class ChooseLaptop {
 	private void writeToFile() {
 	    try {
 	        
-	        File file = new File("C:\\Users\\NAM\\Desktop\\Hóa Đơn\\Bill.txt");
+	    	File file = new File("E:\\javafile\\Bill.txt");
+//	        File file = new File("C:\\Users\\NAM\\Desktop\\Hóa Đơn\\Bill.txt");
 	        if (!file.exists()) {
 	            file.createNewFile();
 	        }
